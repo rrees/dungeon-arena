@@ -1,2 +1,3 @@
-# dungeon-arena
-Hack and slash game
+# Dungeon Arena
+
+An abstract hack and slash adventure game
