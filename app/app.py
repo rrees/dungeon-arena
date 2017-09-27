@@ -3,6 +3,7 @@ import sys
 import logging
 
 import flask
+import redis
 
 from . import handlers
 
@@ -12,6 +13,14 @@ app = flask.Flask(__name__)
 app.secret_key = os.urandom(24)
 
 logger = app.logger
+
+def setup_redis(redis_url):
+    if not redis_url:
+        return None
+    
+    return redis.from_url(redis_url)
+
+redis = setup_redis(os.environ.get("REDIS_URL", None))
 
 routes = [
 	('/', 'index', handlers.pages.front_page, ['GET']),

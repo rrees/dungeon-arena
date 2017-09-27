@@ -1,13 +1,14 @@
 import logging
+import os
 
 import flask
+import redis
 
 from app.config import config
 
 from app import app
 
 def front_page():
-	app.logger.info('Front page handler')
 	return flask.render_template('index.html')
 
 def home():

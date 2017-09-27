@@ -12,7 +12,15 @@ def login_form():
     email = flask.request.form.get("email")
     app.logger.info(email)
 
+    app.logger.info(app.redis)
+
     # Generate login token
+    login_token = uuid.uuid4()
+    app.logger.info(login_token)
+    app.redis.hmset("dungeon-arena:login:" + str(login_token), {"email": email})
+    app.redis.expire(login_token, 120)
+
+    app.logger.info(app.redis.hgetall(login_token))
     # Save login token
     # Send email
     return flask.redirect('/login-sent')
