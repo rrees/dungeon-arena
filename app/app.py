@@ -27,6 +27,7 @@ routes = [
 	('/login-sent', 'login_sent', handlers.pages.login_sent, ['GET']),
     ('/forms/login', 'login_form', handlers.auth.login_form, ['POST']),
     ('/auth/callback', 'auth_callback', handlers.auth.callback, ['GET','POST']),
+    ('/login/<login_token>', 'auth_confirmation', handlers.auth.confirmation, ['GET']),
     ('/home', 'home', handlers.pages.home, ['GET']),
 ]
 
