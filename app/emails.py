@@ -4,6 +4,7 @@ import logging
 import requests
 
 from app import app
+from app import config
 
 def send_login(email, login_token):
 
@@ -13,11 +14,15 @@ def send_login(email, login_token):
     url = f"https://api:{mailgun_api_key}@api.mailgun.net/v3/{mailgun_domain}"
     app.logger.info(url)
 
+    env = os.environ.get('ENV', 'PROD')
+
+    login_prefix = os.environ.get("login", {}).get(env, 'PROD')
+
     payload = {
         'from': 'Login <login@mg.passwordless.ninja>',
         'to': email,
         'subject': 'Dungeon Arena Login',
-        'text': f'http://localhost:4548/login/{login_token}'
+        'text': f'{login_prefix}/{login_token}'
     }
     r = requests.post(url + "/messages", data=payload)
 

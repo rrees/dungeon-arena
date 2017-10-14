@@ -1,12 +1,11 @@
 {% extends 'default.html' %}
 
 {% block nav_items %}
-<li class="active"><a href="javascript:login()">Login</a></li>
 {% endblock %}
 
 {% block content %}
 <div class="container-fluid">
-    <p><em>Hello</em> <strong>world</strong></p>
+
     <form action="/forms/login" method="POST">
         <div class="form-group">
             <label for="email">Email</label>
