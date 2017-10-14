@@ -29,7 +29,7 @@ def send_login(email, login_token):
 
     r = requests.post(url + "/messages", data=payload)
 
-    app.logger.info(r.status_code)
 
     if not r.status_code == 200:
+        app.logger.info(r.status_code)
         app.logger.warning(r.text)
