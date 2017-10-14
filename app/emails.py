@@ -15,8 +15,10 @@ def send_login(email, login_token):
     app.logger.info(url)
 
     env = os.environ.get('ENV', 'PROD')
+    app.logger.info(env)
 
-    login_prefix = os.environ.get("login", {}).get("url_prefix", {}).get(env)
+    login_prefix = config.config.get("login", {}).get("url_prefix", {}).get(env)
+    app.logger.info(login_prefix)
 
     payload = {
         'from': 'Login <login@mg.passwordless.ninja>',
@@ -24,6 +26,7 @@ def send_login(email, login_token):
         'subject': 'Dungeon Arena Login',
         'text': f'{login_prefix}/{login_token}'
     }
+
     r = requests.post(url + "/messages", data=payload)
 
     app.logger.info(r.status_code)
