@@ -24,7 +24,7 @@ def send_login(email, login_token):
         'from': 'Login <login@mg.passwordless.ninja>',
         'to': email,
         'subject': 'Dungeon Arena Login',
-        'text': f'{login_prefix}/{login_token}'
+        'text': f'{login_prefix}/login/{login_token}'
     }
 
     r = requests.post(url + "/messages", data=payload)
