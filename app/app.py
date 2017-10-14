@@ -18,7 +18,7 @@ def setup_redis(redis_url):
     if not redis_url:
         return None
     
-    return redis.from_url(redis_url)
+    return redis.from_url(redis_url, decode_responses=True)
 
 redis = setup_redis(os.environ.get("REDIS_URL", None))
 
@@ -26,7 +26,6 @@ routes = [
 	('/', 'index', handlers.pages.front_page, ['GET']),
 	('/login-sent', 'login_sent', handlers.pages.login_sent, ['GET']),
     ('/forms/login', 'login_form', handlers.auth.login_form, ['POST']),
-    ('/auth/callback', 'auth_callback', handlers.auth.callback, ['GET','POST']),
     ('/login/<login_token>', 'auth_confirmation', handlers.auth.confirmation, ['GET']),
     ('/home', 'home', handlers.pages.home, ['GET']),
 ]

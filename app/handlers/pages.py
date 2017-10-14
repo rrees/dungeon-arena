@@ -12,6 +12,9 @@ def front_page():
 	return flask.render_template('index.html')
 
 def home():
+	if not 'session_id' in flask.session:
+		return flask.redirect(flask.url_for('index'))
+	
 	return flask.render_template('home.html')
 
 def login_sent():
