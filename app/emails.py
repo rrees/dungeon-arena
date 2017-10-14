@@ -16,7 +16,7 @@ def send_login(email, login_token):
 
     env = os.environ.get('ENV', 'PROD')
 
-    login_prefix = os.environ.get("login", {}).get(env, 'PROD')
+    login_prefix = os.environ.get("login", {}).get("url_prefixes", {}).get(env)
 
     payload = {
         'from': 'Login <login@mg.passwordless.ninja>',
