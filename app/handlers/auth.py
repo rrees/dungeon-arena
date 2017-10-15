@@ -38,9 +38,12 @@ def login_form():
     app.logger.info(app.redis.hgetall(login_key(login_token)))
 
     # Send email
-    emails.send_login(email, login_token)
+    send_result = emails.send_login(email, login_token)
 
-    return flask.redirect('/login-sent')
+    if not send_result:
+        return flask.redirect(flask.url_for('login_problem'))
+
+    return flask.redirect(flask.url_for('login_sent'))
 
 def confirmation(login_token):
     app.logger.info(login_token)
@@ -65,3 +68,10 @@ def confirmation(login_token):
     flask.session.permanent = True
 
     return flask.redirect(flask.url_for('home'))
+
+def login_sent():
+	return flask.render_template('login/sent.html')
+
+
+def login_problem():
+	return flask.render_template('login/problem.html')

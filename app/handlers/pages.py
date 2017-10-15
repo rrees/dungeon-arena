@@ -16,6 +16,3 @@ def home():
 		return flask.redirect(flask.url_for('index'))
 	
 	return flask.render_template('home.html')
-
-def login_sent():
-	return flask.render_template('login-sent.html')

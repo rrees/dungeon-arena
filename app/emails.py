@@ -33,3 +33,6 @@ def send_login(email, login_token):
     if not r.status_code == 200:
         app.logger.info(r.status_code)
         app.logger.warning(r.text)
+        return False
+
+    return True
