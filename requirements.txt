@@ -3,3 +3,4 @@ gunicorn
 requests
 boto3
 redis
+Flask-SSLify

@@ -5,12 +5,17 @@ import logging
 import flask
 import redis
 
+from flask_sslify import SSLify
+
 from . import handlers
 
 ENV = os.environ.get("ENV", "PROD")
 
 app = flask.Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", os.urandom(24))
+
+if not ENV == "DEV":
+    sslify = SSLify(app)
 
 logger = app.logger
 
